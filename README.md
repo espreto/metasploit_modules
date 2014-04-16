@@ -1,7 +1,8 @@
+### enum_devices_apple.rb
 
+Script post-exploitation (linux).
 
-Script post-exploitation on linux, enum_devices_apple.rb. 
-OUTPUT:
+Output:
 ```
 msf post(enum_devices_apple) > run
 
@@ -19,7 +20,7 @@ msf post(enum_devices_apple) > run
 [*] Post module execution completed
 msf post(enum_devices_apple) >
 ```
-OR
+Or:
 ```
 msf post(enum_devices_apple) > run
 
