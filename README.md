@@ -1,3 +1,29 @@
+## Modules for metasploit. Simple output.
+
+### bind_awk.rb
+
+Bind payload via AWK.
+
+Output:
+
+TODO
+---
+### couchdb_enum.rb
+
+Enum databases on CouchDB.
+
+Output:
+
+TODO
+---
+### couchdb_login.rb
+
+Brute-force login on CouchDB.
+
+Output:
+
+TODO
+---
 ### enum_devices_apple.rb
 
 Script post-exploitation (linux).
@@ -54,4 +80,20 @@ Safari
 [*] Post module execution completed
 msf post(enum_devices_apple) >
 ```
---------------------
+---
+### enum_system.rb
+
+Find for SUIDs and SGIDs in linux systems.
+
+Output:
+
+TODO
+---
+### reverse_awk.rb
+
+Reverse payload via AWK.
+
+Output:
+
+TODO
+---
