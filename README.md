@@ -6,7 +6,7 @@ Bind payload via AWK.
 
 Output:
 
-TODO
+ToDo
 ---
 ### couchdb_enum.rb
 
@@ -14,7 +14,7 @@ Enum databases on CouchDB.
 
 Output:
 
-TODO
+ToDo
 ---
 ### couchdb_login.rb
 
@@ -22,7 +22,7 @@ Brute-force login on CouchDB.
 
 Output:
 
-TODO
+ToDo
 ---
 ### enum_devices_apple.rb
 
@@ -87,7 +87,7 @@ Find for SUIDs and SGIDs in linux systems.
 
 Output:
 
-TODO
+ToDo
 ---
 ### reverse_awk.rb
 
@@ -95,5 +95,13 @@ Reverse payload via AWK.
 
 Output:
 
-TODO
+ToDo
+---
+### hp_enum_perfd.rb
+
+HP Operations Manager Perfd Environment Scanner
+
+Output:
+
+ToDo
 ---
