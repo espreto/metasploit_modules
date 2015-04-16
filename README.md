@@ -353,7 +353,49 @@ msf auxiliary(hp_enum_perfd) >
 Enum databases on CouchDB.
 
 Output:
-TODO
+```
+msf auxiliary(couchdb_enum) > set RHOST 192.168.1.40
+RHOST => 192.168.1.40
+msf auxiliary(couchdb_enum) > run
+
+[*] Enumerating...
+[+] Found:
+
+[
+  "_replicator",
+  "_users",
+  "database_hackers",
+  "database_msf"
+]
+
+[+] 192.168.1.40:5984 - File saved in: /home/espreto/.msf4/loot/20150415025544_default_192.168.1.40_couchdb.enum_456115.txt
+[*] Auxiliary module execution completed
+msf auxiliary(couchdb_enum) > set TARGETURI /database_msf
+TARGETURI => /database_msf
+msf auxiliary(couchdb_enum) > run
+
+[*] Enumerating...
+[+] Found:
+
+{
+  "db_name": "database_msf",
+  "doc_count": 0,
+  "doc_del_count": 0,
+  "update_seq": 0,
+  "purge_seq": 0,
+  "compact_running": false,
+  "disk_size": 79,
+  "data_size": 0,
+  "instance_start_time": "1429077149813920",
+  "disk_format_version": 6,
+  "committed_update_seq": 0
+}
+
+[+] 192.168.1.40:5984 - File saved in: /home/espreto/.msf4/loot/20150415025602_default_192.168.1.40_couchdb.enum_975484.txt
+[*] Auxiliary module execution completed
+msf auxiliary(couchdb_enum) >
+
+```
 
 ---
 ### couchdb_login.rb
